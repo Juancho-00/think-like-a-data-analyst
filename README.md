@@ -36,26 +36,25 @@ SQL Server · T-SQL (CTEs, CASE, funciones de ventana) · SSMS · VS Code · Git
 ## 📁 Estructura
 
 ```
-├── data/                  # Instrucciones para obtener el dataset (data/raw/)
+├── data/raw/              # Dump MySQL original del dataset
 ├── sql/
-│   ├── 00_setup/          # Creación de la base y carga de datos
+│   ├── 00_setup/          # Base `cine`, tabla dbo.entradas, carga (1.000 usuarios) y validación
 │   ├── 01_exploracion/    # Perfilamiento del dataset
-│   ├── 02_analisis/       # Construcción paso a paso del modelo (01 → 05)
-│   ├── 03_modelo_final/   # Script integrado: parámetros → tramos → impacto → totales
-│   └── 04_escenarios/     # Sensibilidad de P y R, prueba de estrés
+│   ├── 02_analisis/       # Modelo paso a paso (01 → 05) y script final integrado (06)
+│   └── 03_escenarios/     # Sensibilidad de P y R, prueba de estrés
 ├── docs/                  # Contexto, diseño analítico, diccionario, decisiones, resultados
 └── results/               # Exportes CSV de las corridas
 ```
 
 ## ▶️ Cómo reproducirlo
 
-1. Sigue [`data/README.md`](data/README.md) para descargar y cargar los datos.
-2. Ejecuta en SSMS los scripts de `sql/` en orden numérico.
-3. Cambia `@P` y `@R` en `sql/03_modelo_final/modelo_pricing_pase_vip.sql` para simular escenarios.
+1. En SSMS ejecuta `sql/00_setup/00_create_database.sql`, `01_load_entradas.sql` y `02_validacion_carga.sql` (todos los controles deben salir `OK`).
+2. Ejecuta los scripts de `sql/02_analisis/` en orden.
+3. Cambia `@P` y `@R` en `sql/02_analisis/06_script_final_integrado.sql` para simular escenarios.
 
 ## ⚠️ Limitaciones
 
-_Pendiente: se documentan al terminar la prueba de estrés (`sql/04_escenarios/`)._
+_Pendiente: se documentan al terminar la prueba de estrés (`sql/03_escenarios/`)._
 
 ## 🙌 Créditos
 
