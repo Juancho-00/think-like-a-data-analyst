@@ -1,0 +1,5 @@
+# Normaliza finales de línea para que los diffs se vean limpios en GitHub
+* text=auto
+*.sql text eol=crlf linguist-language=TSQL
+*.md  text eol=lf
+*.csv text eol=lf

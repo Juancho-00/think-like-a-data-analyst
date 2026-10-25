@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "ms-mssql.mssql",
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-mermaid",
+    "mechatroner.rainbow-csv"
+  ]
+}

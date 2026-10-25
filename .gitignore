@@ -1,0 +1,28 @@
+# --- Datos ---
+# El dump original se descarga desde la descripción del video (ver data/README.md).
+# Se versiona solo si es pequeño; si pesa más de ~50 MB, descomenta la línea siguiente.
+# data/raw/*
+
+# --- SQL Server / SSMS ---
+*.bak
+*.mdf
+*.ldf
+*.ssmssqlproj
+*.ssmssln
+*.sqlsuo
+*.suo
+*.user
+
+# --- VS Code ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# --- Sistema operativo ---
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# --- Borradores personales (no publicar) ---
+_borradores/
+*.tmp
