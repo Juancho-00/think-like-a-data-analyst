@@ -8,6 +8,8 @@
 
 | Etapa | Estado |
 |---|---|
+| Enfoque de negocio: objetivo, palancas y KPI (ΔFact) | ✅ |
+| Diseño analítico: tramos, incentivo, factor R y supuestos | ✅ |
 | Setup y carga en SQL Server (1.000 usuarios validados) | ✅ |
 | Perfilamiento de datos y rango candidato de P | ✅ |
 | Modelo paso a paso (scripts 01 → 05) | ⏳ |
@@ -44,6 +46,8 @@ Detalle en [`docs/05_resultados.md`](docs/05_resultados.md).
 2. **Estimar el incentivo** de compra: `min(G / P, 1)`.
 3. **Ajustar a la realidad** con un factor R calibrado en una prueba controlada: `adopción = incentivo ^ R`.
 4. **Calcular el neto esperado**: ingreso extra en taquilla − canibalización + consumo adicional en bar.
+
+**Supuestos clave:** la venta del pase reemplaza la taquilla de quien lo compra, por eso se modela como P − G por comprador y no como una línea aparte. El Tramo 1 suma 1 visita extra al mes y el Tramo 2 un 10 % más de visitas. R = 1 hasta calibrarlo con un piloto. Lista completa en [`docs/04_decisiones_y_supuestos.md`](docs/04_decisiones_y_supuestos.md).
 
 Detalle completo en [`docs/02_diseno_analitico.md`](docs/02_diseno_analitico.md).
 
