@@ -12,7 +12,7 @@
 | Diseño analítico: tramos, incentivo, factor R y supuestos | ✅ |
 | Setup y carga en SQL Server (1.000 usuarios validados) | ✅ |
 | Perfilamiento de datos y rango candidato de P | ✅ |
-| Modelo paso a paso (scripts 01 → 05) | ⏳ |
+| Modelo paso a paso (scripts 01 → 05) | 🔄 1 de 5 (segmentación por tramos ✅) |
 | Script final integrado (06) | ⏳ |
 | Escenarios y prueba de estrés | ⏳ |
 
@@ -21,6 +21,8 @@
 - **Gasto discreto.** Cada entrada cuesta 8 €, así que el gasto anual en entradas solo toma 8 valores (96 € a 768 €) y los tramos solo cambian en múltiplos de 96 €.
 - **Base concentrada en usuarios ocasionales.** La mediana es 192 € y la media 252 €: el 56 % de los usuarios va al cine 1 o 2 veces al mes.
 - **Rango candidato del pase: 288 € – 576 €** (del P75 a ≈ P92). Por debajo de la mediana domina la canibalización; por encima de 768 € no queda nadie por canibalizar y el modelo pierde sentido.
+
+- **Segmentación con P = 400 €:** 847 usuarios (84,7 %) gastan menos que el pase y 153 (15,3 %) gastan más. Estos últimos promedian 547 € al año y casi 6 visitas al mes: son el ingreso en riesgo de canibalización.
 
 Detalle en [`docs/05_resultados.md`](docs/05_resultados.md).
 

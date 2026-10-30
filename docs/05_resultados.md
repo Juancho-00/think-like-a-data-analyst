@@ -57,32 +57,50 @@ La variable es **discreta**: `gasto_entradas_anual = visitas_mensuales × 12 × 
 - **Límite superior.** Con P > 768 € (el máximo), el Tramo 2 queda vacío y el resultado deja de tener sentido económico (ver prueba de estrés).
 - **Efecto escalón.** Como G es discreto, la segmentación solo cambia cuando P cruza un múltiplo de 96 €. Por ejemplo, P = 300 € y P = 384 € producen los mismos tramos. Hay que tenerlo en cuenta al leer la curva ΔFact vs P.
 
-## 2. Bitácora de corridas
+## 2. Modelo paso a paso
+
+### Script 01 — Datos agregados por tramo ✅
+
+Script: [`sql/02_analisis/01_datos_agregados_por_tramo.sql`](../sql/02_analisis/01_datos_agregados_por_tramo.sql)
+
+| P | Tramo | Usuarios | Gasto entradas medio | Visitas/mes media | Bar por visita medio |
+|---|---|---|---|---|---|
+| 400 € | Tramo 1 | 847 | 198,69 € | 2,07 | 4,11 € |
+| 400 € | Tramo 2 | 153 | 547,14 € | 5,70 | 4,02 € |
+| 300 € | Tramo 1 | 757 | 176,66 € | 1,84 | 4,14 € |
+| 300 € | Tramo 2 | 243 | 486,72 € | 5,07 | 3,97 € |
+
+**Lectura de negocio (P = 400 €):**
+- El **Tramo 1** reúne al 84,7 % de la base. Gasta en promedio 198,69 €, así que el pase le exige pagar ~201 € más al año: hay que convencerlo de venir más.
+- El **Tramo 2** es solo el 15,3 %, pero cada usuario gasta 547,14 € y va casi 6 veces al mes. Con el pase pagaría ~147 € menos: ese es el ingreso en riesgo de canibalización.
+- El gasto en bar por visita es casi igual en ambos tramos (~4 €). El impacto en bar dependerá de **cuántas visitas extra** genere el pase, no de cuánto consume cada cliente.
+
+## 3. Bitácora de corridas
 
 | Corrida | P | R | Usuarios T1 | Usuarios T2 | Adoptantes | ΔG entradas | ΔC bar | ΔFact | Observación |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | 400 | 1.0 | | | | | | | |
+| 1 | 400 | 1.0 | 847 | 153 | | | | | Script 01 validado |
 | 2 | | | | | | | | | |
 | 3 | | | | | | | | | |
 
-## 3. Precio óptimo
+## 4. Precio óptimo
 
 - **P\*** = ✍️
 - **ΔFact esperado** = ✍️
 - Rango robusto (P que siguen siendo rentables con R entre 0.5 y 2): ✍️
 
-## 4. Prueba de estrés P = 10 000
+## 5. Prueba de estrés P = 10 000
 
 - Predicción antes de correr: ✍️
 - Resultado real: ✍️
 - Explicación: ✍️
 
-## 5. Limitaciones identificadas
+## 6. Limitaciones identificadas
 
 1. ✍️
 2. ✍️
 3. ✍️
 
-## 6. Gráficos
+## 7. Gráficos
 
 <!-- Exporta la curva ΔFact vs P a docs/img/curva_precio.png y enlázala aquí -->

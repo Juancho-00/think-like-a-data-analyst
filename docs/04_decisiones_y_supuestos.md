@@ -16,6 +16,8 @@ Registro de cada decisión técnica o de negocio. Formato corto: qué, por qué,
 | 10 | 2026-10-29 | R como exponente: tasa = incentivo^R | Mantiene la tasa en [0, 1] para cualquier R ≥ 0; con R = 1 no altera el incentivo | Incentivo × R (puede superar 1) |
 | 11 | 2026-10-29 | G = P exacto cae en Tramo 2 | Igual que el caso original; con G discreto ocurre en los cortes (288, 384, 480…) | G ≤ P en Tramo 1 |
 | 12 | 2026-10-29 | Cálculo con promedios por tramo (como el caso original) | Comparabilidad con el video; la versión fila a fila queda como mejora a cuantificar | Fila a fila desde el inicio |
+| 13 | 2026-10-29 | Un solo `DECLARE @P` por script, al inicio, y CTE con el mismo nombre en todos los scripts (`usuarios_segmentados`) | El precio se cambia en un único lugar y los bloques se reutilizan sin cambios en el script 06 | Declarar el parámetro en cada consulta del script |
+| 14 | 2026-10-29 | Alias de columnas en snake_case (`gasto_entradas_anual_medio`) | Se referencian sin corchetes en CTEs posteriores y coinciden con el script 06 | Alias con espacios entre corchetes |
 
 ## Supuestos del modelo
 
@@ -31,6 +33,6 @@ Registro de cada decisión técnica o de negocio. Formato corto: qué, por qué,
 
 | MySQL (video) | T-SQL (mi versión) | Nota |
 |---|---|---|
-| `SET @P = 400.0;` | ✍️ | |
+| `SET @P = 400.0;` | `DECLARE @P FLOAT = 400.0;` | La variable debe declararse con tipo y vive solo hasta el siguiente `GO` |
 | `POW(x, y)` | ✍️ | |
 | `LEAST(a, b)` | ✍️ | Disponible solo en SQL Server 2022+ |
