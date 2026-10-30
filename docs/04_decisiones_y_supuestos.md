@@ -8,7 +8,9 @@ Registro de cada decisión técnica o de negocio. Formato corto: qué, por qué,
 | 2 | 2026-10-24 | Tipos FLOAT para todas las métricas y PK en `user_id` | Replica el comportamiento numérico del modelo original y evita la división entera de T-SQL; el dump no tenía PK, pero los 1.000 IDs son únicos | DECIMAL(p,s): más exacto para dinero, pero cambia levemente los resultados frente al video |
 | 3 | 2026-10-24 | Carga con INSERT en lotes de 250 filas | Límite de 1.000 filas por `VALUES` en SQL Server; el script es re-ejecutable | BULK INSERT desde CSV (exige ruta local del servidor) |
 | 4 | 2026-10-24 | Misma estructura de scripts que el autor (01 → 06) | Comparar mi solución contra el caso original paso a paso | Pipeline propio de CTEs |
-| 3 | | | | |
+| 5 | 2026-10-29 | Desviación estándar poblacional (`STDEVP`) | La tabla contiene a todos los clientes fidelizados, no una muestra | `STDEV` (muestral): 157,25 vs 157,17, diferencia irrelevante |
+| 6 | 2026-10-29 | Validaciones de consistencia fila a fila con tolerancia 0,01 | Comparar sumas puede esconder errores que se compensan entre filas, y el dump redondea a 6 cifras | Comparar agregados (suma vs suma) |
+| 7 | 2026-10-29 | Rango candidato de P: 288 € – 576 € (P75 a ≈ P92) | Por debajo de la mediana domina la canibalización; por encima de 768 € el Tramo 2 queda vacío | Elegir P a ojo o con la media (252 €), que está inflada por la cola derecha |
 
 ## Supuestos del modelo
 

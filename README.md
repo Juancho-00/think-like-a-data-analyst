@@ -4,6 +4,24 @@
 
 ¿Cuánto debería costar una tarifa plana anual para ir al cine sin límite? Si el pase es muy barato, canibaliza a los mejores clientes; si es muy caro, nadie lo compra. Este proyecto estima con **SQL Server** el precio que maximiza el incremento total de facturación de una cadena de cines, sumando el efecto sobre **taquilla** y sobre **bar/concesiones**.
 
+## 🚦 Avance
+
+| Etapa | Estado |
+|---|---|
+| Setup y carga en SQL Server (1.000 usuarios validados) | ✅ |
+| Perfilamiento de datos y rango candidato de P | ✅ |
+| Modelo paso a paso (scripts 01 → 05) | ⏳ |
+| Script final integrado (06) | ⏳ |
+| Escenarios y prueba de estrés | ⏳ |
+
+## 🔍 Hallazgos del perfilamiento
+
+- **Gasto discreto.** Cada entrada cuesta 8 €, así que el gasto anual en entradas solo toma 8 valores (96 € a 768 €) y los tramos solo cambian en múltiplos de 96 €.
+- **Base concentrada en usuarios ocasionales.** La mediana es 192 € y la media 252 €: el 56 % de los usuarios va al cine 1 o 2 veces al mes.
+- **Rango candidato del pase: 288 € – 576 €** (del P75 a ≈ P92). Por debajo de la mediana domina la canibalización; por encima de 768 € no queda nadie por canibalizar y el modelo pierde sentido.
+
+Detalle en [`docs/05_resultados.md`](docs/05_resultados.md).
+
 ## 📌 Resultado principal
 
 | Métrica | Valor |
