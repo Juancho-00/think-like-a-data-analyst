@@ -18,6 +18,8 @@ Registro de cada decisión técnica o de negocio. Formato corto: qué, por qué,
 | 12 | 2026-10-29 | Cálculo con promedios por tramo (como el caso original) | Comparabilidad con el video; la versión fila a fila queda como mejora a cuantificar | Fila a fila desde el inicio |
 | 13 | 2026-10-29 | Un solo `DECLARE @P` por script, al inicio, y CTE con el mismo nombre en todos los scripts (`usuarios_segmentados`) | El precio se cambia en un único lugar y los bloques se reutilizan sin cambios en el script 06 | Declarar el parámetro en cada consulta del script |
 | 14 | 2026-10-29 | Alias de columnas en snake_case (`gasto_entradas_anual_medio`) | Se referencian sin corchetes en CTEs posteriores y coinciden con el script 06 | Alias con espacios entre corchetes |
+| 15 | 2026-10-29 | Usar `LEAST` nativo para capar el incentivo | El servidor es SQL Server 2022, donde `LEAST` está disponible; mismo código que el caso original | `IIF(x > 1, 1, x)` / `CASE` |
+| 16 | 2026-10-29 | Incentivo del tramo = `LEAST(AVG(G)/P, 1)` (usuario promedio) | Con tramos cortados en P es idéntico al promedio individual y replica el caso original | `AVG(LEAST(G/P, 1))`: equivalente con R = 1, pero no con R ≠ 1 (ver resultados del script 02) |
 
 ## Supuestos del modelo
 
@@ -35,4 +37,4 @@ Registro de cada decisión técnica o de negocio. Formato corto: qué, por qué,
 |---|---|---|
 | `SET @P = 400.0;` | `DECLARE @P FLOAT = 400.0;` | La variable debe declararse con tipo y vive solo hasta el siguiente `GO` |
 | `POW(x, y)` | ✍️ | |
-| `LEAST(a, b)` | ✍️ | Disponible solo en SQL Server 2022+ |
+| `LEAST(a, b)` | `LEAST(a, b)` | Igual en SQL Server 2022+ (mi versión). En versiones anteriores: `IIF(a < b, a, b)` |

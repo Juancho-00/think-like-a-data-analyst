@@ -75,6 +75,35 @@ Script: [`sql/02_analisis/01_datos_agregados_por_tramo.sql`](../sql/02_analisis/
 - El **Tramo 2** es solo el 15,3 %, pero cada usuario gasta 547,14 € y va casi 6 veces al mes. Con el pase pagaría ~147 € menos: ese es el ingreso en riesgo de canibalización.
 - El gasto en bar por visita es casi igual en ambos tramos (~4 €). El impacto en bar dependerá de **cuántas visitas extra** genere el pase, no de cuánto consume cada cliente.
 
+### Script 02 — Incentivo medio por tramo ✅
+
+Script: [`sql/02_analisis/02_incentivo_medio_por_tramo.sql`](../sql/02_analisis/02_incentivo_medio_por_tramo.sql)
+
+| P | Tramo | A: `LEAST(AVG(G)/P, 1)` | B: `AVG(LEAST(G/P, 1))` |
+|---|---|---|---|
+| 400 € | Tramo 1 | 0,497 | 0,497 |
+| 400 € | Tramo 2 | 1,000 | 1,000 |
+| 300 € | Tramo 1 | 0,589 | 0,589 |
+| 300 € | Tramo 2 | 1,000 | 1,000 |
+| 400 € | Toda la base, sin segmentar | 0,630 | 0,574 |
+
+**Lectura:**
+- El usuario típico del Tramo 1 gasta la mitad del precio del pase (incentivo ≈ 0,5): el pase le resulta atractivo a medias.
+- El Tramo 2 tiene incentivo máximo (1,0): el pase ya le sale igual o más barato que lo que paga hoy.
+
+**¿Por qué A = B en cada tramo?** El corte de los tramos (G < P) coincide con el punto donde actúa el tope de 1.
+- En el Tramo 1 nadie llega al tope, así que `LEAST` no recorta nada y el promedio de G/P es igual al promedio de G dividido por P.
+- En el Tramo 2 todos están en el tope, así que las dos formas dan 1.
+- Sin segmentar sí difieren (B < A): el tope recorta a los que gastan más que P y su exceso ya no compensa a los que gastan menos. La desigualdad de Jensen garantiza B ≤ A porque `min(x, 1)` es cóncava.
+
+**Implicación para el script 03:** con R ≠ 1, la potencia deja de ser lineal y en el Tramo 1 la tasa del usuario promedio (A^R) ya no coincide con el promedio de las tasas individuales. Con P = 400:
+
+| R | A^R (caso original) | Promedio de incentivo^R | Sesgo del método original |
+|---|---|---|---|
+| 0,5 | 0,705 | 0,683 | Sobreestima la adopción |
+| 1,0 | 0,497 | 0,497 | Sin sesgo |
+| 2,0 | 0,247 | 0,306 | Subestima la adopción |
+
 ## 3. Bitácora de corridas
 
 | Corrida | P | R | Usuarios T1 | Usuarios T2 | Adoptantes | ΔG entradas | ΔC bar | ΔFact | Observación |

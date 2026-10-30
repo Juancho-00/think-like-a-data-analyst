@@ -12,7 +12,7 @@
 | Diseño analítico: tramos, incentivo, factor R y supuestos | ✅ |
 | Setup y carga en SQL Server (1.000 usuarios validados) | ✅ |
 | Perfilamiento de datos y rango candidato de P | ✅ |
-| Modelo paso a paso (scripts 01 → 05) | 🔄 1 de 5 (segmentación por tramos ✅) |
+| Modelo paso a paso (scripts 01 → 05) | 🔄 2 de 5 (segmentación ✅ · incentivo ✅) |
 | Script final integrado (06) | ⏳ |
 | Escenarios y prueba de estrés | ⏳ |
 
@@ -23,6 +23,7 @@
 - **Rango candidato del pase: 288 € – 576 €** (del P75 a ≈ P92). Por debajo de la mediana domina la canibalización; por encima de 768 € no queda nadie por canibalizar y el modelo pierde sentido.
 
 - **Segmentación con P = 400 €:** 847 usuarios (84,7 %) gastan menos que el pase y 153 (15,3 %) gastan más. Estos últimos promedian 547 € al año y casi 6 visitas al mes: son el ingreso en riesgo de canibalización.
+- **Incentivo de compra con P = 400 €:** 0,50 en el Tramo 1 (gastan la mitad del precio del pase) y 1,00 en el Tramo 2. Calcular el incentivo del usuario promedio o el promedio de los incentivos da igual dentro de cada tramo, pero deja de dar igual con R ≠ 1: el método por promedios sesga la adopción.
 
 Detalle en [`docs/05_resultados.md`](docs/05_resultados.md).
 
